@@ -1,6 +1,6 @@
 <?php 
 
-	require_once("./private/init.php");
+	require_once("../private/init.php");
 	
 	$submitted = $_SERVER['REQUEST_METHOD'] == 'POST';
 	$error = false;
@@ -56,7 +56,7 @@
 ?>
 
 <html>
-<head><link rel="stylesheet" type="text/css" href = "./style.css"></head>
+<head><link rel="stylesheet" type="text/css" href = "../private/style.css"></head>
 <body>
 
 	<form action="index.php" method="post">
@@ -108,12 +108,16 @@
 	
 	</form>
 
-	<a href=
+	<a href="stats.php">See the stats</a><br>
 	
 	<?php 
 		if($error){
 		
+			echo "<br>";
+			echo "<div id=\"note\">";
+			echo "Error:<br>";
 			echo "Some value is invalid. Recheck inputs.";
+			echo "</div>";
 			
 		} 
 	?>

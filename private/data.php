@@ -1,6 +1,6 @@
 <?php 
 
-	$TRIMARK_QUANTS = array(
+	$ARMOR_QUANTS = array(
 	
 		'nanite_compound' => 3,
 		'interface_circuit' => 5,
@@ -8,7 +8,7 @@
 	
 	);
 
-	$EXTENDER_QUANTS = array(
+	$SHIELD_QUANTS = array(
 	
 		'power_circuit' => 6,
 		'logic_circuit' => 6,
