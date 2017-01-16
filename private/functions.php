@@ -28,25 +28,87 @@
 	}
 	
 	function calculate_profit_for_record($stats){
+		global $ARMOR_QUANTS;
+		global $SHIELD_QUANTS;
 		
 		$costPerArmor =  ($stats['intact_armor_plates'] * $ARMOR_QUANTS['intact_armor_plates']);
 		$costPerArmor += ($stats['nanite_compound'] * $ARMOR_QUANTS['nanite_compound']);
 		$costPerArmor += ($stats['interface_circuit'] * $ARMOR_QUANTS['interface_circuit']);
 		
+		//echo '<br><br>DEBUG: Calculated armor cost: ' . $costPerArmor;
+		
 		$costPerShield =  ($stats['enhanced_ward_console'] * $SHIELD_QUANTS['enhanced_ward_console']);
 		$costPerShield += ($stats['logic_circuit'] * $SHIELD_QUANTS['logic_circuit']);
 		$costPerShield += ($stats['power_circuit'] * $SHIELD_QUANTS['power_circuit']);
 		
+		//echo '<br><br>DEBUG: Calculated shield cost: ' . $costPerShield;
+		
 		$totalCost = ($costPerArmor * $stats['armor_quant']) + ($costPerShield * $stats['shield_quant']);
+		
+		//echo '<br><br>DEBUG: Total cost for this run: ' . $totalCost;
 		
 		$revenuePerArmor = $stats['armor_price'];
 		$revenuePerShield = $stats['shield_price'];
 		
 		$totalRevenue = ($revenuePerArmor * $stats['armor_quant']) + ($revenuePerShield * $stats['shield_quant']);
 		
+		//echo '<br><br>DEBUG: Total revenue for this run: ' . $totalRevenue . '<br>';
+		
 		$profit = $totalRevenue - $totalCost;
 
 		return $profit;
+		
+	}
+	
+	function insert_into_db($stats){
+		global $db;
+		
+		$date = date('Y-m-d H:i:s');
+				
+		$sql =  'INSERT INTO rig_log ';
+		$sql .= '(date_completed, intact_armor_plates, nanite_compound, interface_circuit, power_circuit, logic_circuit, enhanced_ward_console, ';
+		$sql .= 'shield_quant, shield_price, armor_quant, armor_price, tax)';
+		$sql .= ' VALUES ';
+		$sql .= '(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);';
+		$sql = $db->prepare($sql);
+		
+		$sql->bind_param('sddddddididd', 
+			$date, 
+			$stats['intact_armor_plates'],
+			$stats['nanite_compound'],
+			$stats['interface_circuit'],
+			$stats['power_circuit'],
+			$stats['logic_circuit'],
+			$stats['enhanced_ward_console'],
+			$stats['shield_quant'],
+			$stats['shield_price'],
+			$stats['armor_quant'],
+			$stats['armor_price'],
+			$stats['tax']
+			);
+		
+		$result = $sql->execute();
+		
+		if(!$result){
+			
+			echo db_error($db);
+			db_close($db);
+			exit;
+			
+		}
+		
+	}
+	
+	function get_all_logs(){
+		global $db;
+		
+		$sql = 'SELECT * FROM rig_log ORDER BY id asc;';
+		$result = $db->query($sql);
+		
+		if(!$result)
+			exit('SELECT query failed.');
+		
+		return $result;
 		
 	}
 	

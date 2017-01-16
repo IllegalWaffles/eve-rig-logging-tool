@@ -15,7 +15,8 @@
 		'shield_quant' => 			(isset($_POST['shield_quant']) && $submitted?$_POST['shield_quant']:0),
 		'shield_price' => 			(isset($_POST['shield_price']) && $submitted?$_POST['shield_price']:0),
 		'armor_quant' => 			(isset($_POST['armor_quant']) && $submitted?$_POST['armor_quant']:0),
-		'armor_price' => 			(isset($_POST['armor_price']) && $submitted?$_POST['armor_price']:0)
+		'armor_price' => 			(isset($_POST['armor_price']) && $submitted?$_POST['armor_price']:0),
+		'tax' => 					(isset($_POST['tax']) && $submitted?$_POST['tax']:0)
 	);
 	
 	if($submitted){
@@ -24,30 +25,7 @@
 		
 		if(!$error){
 			//No errors. Proceed
-			$date = date('Y-m-d H:i:s');
-				
-			$sql =  'INSERT INTO rig_log ';
-			$sql .= '(date_completed, intact_armor_plates, nanite_compound, interface_circuit, power_circuit, logic_circuit, enhanced_ward_console, ';
-			$sql .= 'shield_quant, shield_price, armor_quant, armor_price)';
-			$sql .= ' VALUES ';
-			$sql .= '(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);';
-			$sql = $db->prepare($sql);
-			
-			$sql->bind_param('sddddddidid', 
-				$date, 
-				$stats['intact_armor_plates'],
-				$stats['nanite_compound'],
-				$stats['interface_circuit'],
-				$stats['power_circuit'],
-				$stats['logic_circuit'],
-				$stats['enhanced_ward_console'],
-				$stats['shield_quant'],
-				$stats['shield_price'],
-				$stats['armor_quant'],
-				$stats['armor_price']
-				);
-			
-			$result = $sql->execute();
+			insert_into_db($stats);
 			
 		}
 		
@@ -59,7 +37,7 @@
 <head><link rel="stylesheet" type="text/css" href = "../private/style.css"></head>
 <body>
 
-	<form action="index.php" method="post">
+	<form action="index.php" method="post" id="main_form">
 
 		<div id="header">Rig Logging Tool</div>
 		<br>
@@ -78,7 +56,10 @@
 				<td>Mat 4 (PowerC): </td> <td><input type="number" step=0.01 name="powerc" value=<?php echo isset($stats['power_circuit'])?$stats['power_circuit']:0.0; ?>></td>
 				<td>Mat 5 (LogicC): </td> <td><input type="number" step=0.01 name="logicc" value=<?php echo isset($stats['logic_circuit'])?$stats['logic_circuit']:0.0; ?>></td>
 				<td>Mat 6 (Consol): </td> <td><input type="number" step=0.01 name="consol" value=<?php echo isset($stats['enhanced_ward_console'])?$stats['enhanced_ward_console']:0.0; ?>></td>
+			</tr>
 			<tr>
+				<td>Station tax: </td><td><input type="number" step=0.01 name="tax" value=<?php echo isset($stats['tax'])?$stats['tax']:0.0;?>></td>
+		
 	
 		</table>
 	
@@ -108,6 +89,19 @@
 	
 	</form>
 
+	<?php 
+	
+		if($submitted && !$error){
+		
+			echo '<br>';
+			echo '<div id="secondary_header">';
+			echo 'Values submitted.';
+			echo '</div>';
+	
+		}
+	
+	?>
+	
 	<a href="stats.php">See the stats</a><br>
 	
 	<?php 
