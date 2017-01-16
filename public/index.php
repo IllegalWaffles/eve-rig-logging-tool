@@ -1,6 +1,6 @@
 <?php 
 
-	require_once("../private/init.php");
+	require_once("../private/php/init.php");
 	
 	$submitted = $_SERVER['REQUEST_METHOD'] == 'POST';
 	$error = false;
@@ -34,7 +34,7 @@
 ?>
 
 <html>
-<head><link rel="stylesheet" type="text/css" href = "../private/style.css"></head>
+<head><link rel="stylesheet" type="text/css" href = "../private/style/style.css"></head>
 <body>
 
 	<form action="index.php" method="post" id="main_form">

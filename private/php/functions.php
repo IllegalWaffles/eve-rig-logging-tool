@@ -24,7 +24,7 @@
 	function validate_stats($statarray) {
 		
 		foreach ($statarray as $val)
-			if($val <= 0)
+			if($val < 0)
 				return false;
 		
 		return true;

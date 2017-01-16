@@ -1,6 +1,6 @@
 <?php
 
-	require_once("../private/init.php");
+	require_once("../private/php/init.php");
 
 	$log = get_all_logs();
 	$table_output = array();
@@ -13,10 +13,12 @@
 	$avg_profit =	0;
 	$total_profit =	0;
 	
+	$num_records = 0;
+	
 ?>
 
 <html>
-<head><link rel="stylesheet" type="text/css" href = "../private/style.css"></head>
+<head><link rel="stylesheet" type="text/css" href = "../private/style/style.css"></head>
 <body>
 
 	<a href="index.php">Back to Logging Tool</a><br>
@@ -24,7 +26,9 @@
 	
 	<?php 
 	
-		if($log->num_rows != 0) {
+		$num_records = $log->num_rows;
+	
+		if($num_records != 0) {
 	
 	
 			while($row = $log->fetch_assoc()) {
@@ -58,26 +62,33 @@
 		
 		}
 		else
-		{
-			
-			echo 'No data found. Add some records and try again.';
 			$log->free();
-			
-		}
 	
 	?>
 	
-	Total cycles: <?php echo isset($total_cycles)?$total_cycles:'Var unset'; ?><br>
-	Total runs: <?php echo isset($total_runs)?$total_runs:'Var unset'; ?><br>
-	Highest profit: <?php echo isset($max_profit)?fmt($max_profit):'Var unset'; ?><br>
-	Average profit: <?php echo isset($avg_profit)?fmt($avg_profit):'Var unset'; ?><br>
-	Total profit: <?php echo isset($total_profit)?fmt($total_profit):'Var unset'; ?><br>
+	<table>
+		<tr>
+			<td>Total cycles:</td><td><?php echo isset($total_cycles)?$total_cycles:'Var unset';?></td>
+		</tr>
+		<tr>
+			<td>Total runs:</td><td><?php echo isset($total_runs)?$total_runs:'Var unset';?></td>
+		</tr>
+		<tr>
+			<td>Highest profit:</td><td id="right_just"><?php echo isset($max_profit)?fmt($max_profit):'Var unset';?></td>
+		</tr>
+		<tr>
+			<td>Average profit:</td><td id="right_just"><?php echo isset($avg_profit)?fmt($avg_profit):'Var unset';?></td>
+		</tr>
+		<tr>
+			<td>Total profit:</td><td id="right_just"><?php echo isset($total_profit)?fmt($total_profit):'Var unset';?></td>
+		</tr>
+	</table>
 	
 	<br>
 	
 	<?php
 	
-		if($submitted){
+		if($submitted && $num_records > 0) {
 				
 			echo 'All records: <br>';
 				
@@ -102,6 +113,12 @@
 			echo '<br>';
 			
 		}
+		else if($num_records <= 0) {
+			
+			echo 'No data found. Add some records and try again.';
+			
+		}
+		
 	?>
 	
 	<form action="stats.php" method="post">

@@ -54,6 +54,12 @@ input[type="number"] {
 	
 }
 
+#right_just {
+	
+	text-align: right;
+	
+}
+
 #table_border {
 	
 	border: 1px solid black;
