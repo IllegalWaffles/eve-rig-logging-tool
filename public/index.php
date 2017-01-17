@@ -103,6 +103,7 @@
 	?>
 	
 	<a href="stats.php">See the stats</a><br>
+	<a href="edit.php">Edit a record</a><br>
 	
 	<?php 
 		if($error){

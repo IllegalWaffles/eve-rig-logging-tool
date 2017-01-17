@@ -111,4 +111,17 @@
 		
 	}
 	
+	function get_log_by_ID($id=0){
+		global $db;
+		
+		$sql = 'SELECT * FROM rig_log WHERE id=' . $id . ';';
+		$result = $db->query($sql);
+		
+		if(!$result)
+			exit('Getting record by ID failed.');
+		
+		return $result;
+		
+	}
+	
 ?>

@@ -113,7 +113,7 @@
 			echo '<br>';
 			
 		}
-		else if($num_records <= 0) {
+		else if($submitted && $num_records <= 0) {
 			
 			echo 'No data found. Add some records and try again.';
 			
