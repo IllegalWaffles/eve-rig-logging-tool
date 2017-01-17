@@ -111,7 +111,7 @@
 		
 	}
 	
-	function get_log_by_ID($id=0){
+	function get_log_by_ID($id){
 		global $db;
 		
 		$sql = 'SELECT * FROM rig_log WHERE id=' . $id . ';';

@@ -7,12 +7,11 @@
 	
 	$record;
 	
+	
 	if($selected) {
 		
 		$id_to_get = isset($_POST['record_id'])?$_POST['record_id']:0;
 		$record = get_log_by_ID($id_to_get)->fetch_assoc();
-		
-		echo 'DEBUG: ' . $record['shield_quant'];
 		
 	}
 	
@@ -39,26 +38,20 @@
 			
 			echo '<select name=\'record_id\'>';
 			
-			$i = 0;
-			while($record=$records->fetch_assoc()){
-			
-				echo '<option value=' . $record['id'] . '>'. $record['date_completed'] .'</option>';
-			
-			}
+			while($row=$records->fetch_assoc())
+				echo "\n\t\t\t" . '<option value=' . $row['id'] . '>'. $row['date_completed'] .'</option>';
 
-			echo '</select>';
+			
+			echo "\n\t\t" . '</select>';
 	
 		}
 	
 		?>
-		
 		<input type="submit" name="select" value="Edit this record">
 	
 		
 		
-		<?php if($selected) { 
-		
-			echo isset($record['intact_armor_plates'])?'SET':'NOT SET'; ?>
+		<?php if($selected) { ?>
 		
 			<form action="edit.php" method="post">
 			
