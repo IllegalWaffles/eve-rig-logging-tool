@@ -1,12 +1,13 @@
 <?php
 
 	require_once("../private/php/init.php");
+
 	$selected = isset($_POST['select']);
 	$submitted = isset($_POST['submit']);
+	
 	$records = get_all_logs();
 	
 	$record;
-	
 	
 	if($selected) {
 		
@@ -14,11 +15,13 @@
 		$record = get_log_by_ID($id_to_get)->fetch_assoc();
 		
 	}
-	
-	if($submitted) {
+	else if($submitted) {
 		
-		// Get specific record
-		
+		// Alter the record as needed
+		if(!isset($_GET['id']))
+			header('Location: index.php');
+			
+		$id = $_GET['id'];
 		
 	}
 	
@@ -49,11 +52,9 @@
 		?>
 		<input type="submit" name="select" value="Edit this record">
 	
-		
-		
 		<?php if($selected) { ?>
 		
-			<form action="edit.php" method="post">
+			<form action="edit.php?id=<?php echo $record['id']; ?>" method="post">
 			
 				<table>
 		
@@ -92,7 +93,7 @@
 			
 				</table>
 				
-					<input type="submit" name="submit" value="Submit edits">
+				<input type="submit" name="submit" value="Submit edits">
 			
 			</form>
 			
