@@ -142,7 +142,8 @@
 		$sql .= 'power_circuit = ?, logic_circuit = ?, enhanced_ward_console = ?, ';
 		$sql .= 'shield_quant = ?, shield_price = ?, armor_quant = ?, armor_price = ?, ';
 		$sql .= 'tax = ? ';
-		$sql .= 'WHERE id = ?;';
+		$sql .= 'WHERE id = ? ';
+		$sql .= 'LIMIT 1;';
 		
 		$sql = $db->prepare($sql);
 		

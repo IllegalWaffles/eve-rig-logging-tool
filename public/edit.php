@@ -40,6 +40,8 @@
 		
 		update_record($record);
 		
+		echo '<div id="secondary_header"> Edit submitted. </div>';
+		
 	}
 	
 ?>
@@ -47,6 +49,8 @@
 <html>
 <head><link rel="stylesheet" type="text/css" href = "../private/style/style.css"></head>
 <body>
+
+	<div id="header">Editing module</div>
 
 	<form action="edit.php" method="post">
 			
@@ -72,7 +76,12 @@
 	
 	<?php if($selected) { ?>
 	
-	<form action="edit.php?id=<?php echo $record['id']; ?>" method="post">
+	<form id="edit_form" action="edit.php?id=<?php echo $record['id']; ?>" method="post">
+	
+		<div id = "header" >Now editing record on:</div>
+		<div id="note"><?php echo $record['date_completed']; ?></div>
+	
+		<br>
 	
 		<table>
 
@@ -90,7 +99,7 @@
 				<td>Mat 6 (Consol): </td> <td><input type="number" step=0.01 name="consol" value=<?php echo $record['enhanced_ward_console']; ?>></td>
 			</tr>
 			<tr>
-				<td>Station tax: </td><td><input type="number" step=0.01 name="tax" value=<?php echo $record['tax']; ?>></td>
+				<td>Station tax: </td><td><input type="number" step=0.0001 name="tax" value=<?php echo $record['tax']; ?>></td>
 			</tr>
 
 		</table>
@@ -111,6 +120,7 @@
 	
 		</table>
 		
+		<br>
 		<input type="submit" name="submit" value="Submit edits">
 		
 	</form>

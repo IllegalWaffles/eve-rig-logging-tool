@@ -56,7 +56,7 @@
 				<td>Mat 6 (Consol): </td> <td><input type="number" step=0.01 name="consol" value=<?php echo isset($stats['enhanced_ward_console'])?$stats['enhanced_ward_console']:0.0; ?>></td>
 			</tr>
 			<tr>
-				<td>Station tax: </td><td><input type="number" step=0.01 name="tax" value=<?php echo isset($stats['tax'])?$stats['tax']:0.0;?>></td>
+				<td>Station tax: </td><td><input type="number" step=0.0001 name="tax" value=<?php echo isset($stats['tax'])?$stats['tax']:0.0;?>></td>
 		
 	
 		</table>

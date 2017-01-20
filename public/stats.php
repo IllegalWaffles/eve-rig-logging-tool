@@ -21,7 +21,6 @@
 <head><link rel="stylesheet" type="text/css" href = "../private/style/style.css"></head>
 <body>
 
-	<a href="index.php">Back to Logging Tool</a><br>
 	<div id="header">Statistics</div>
 	
 	<?php 
@@ -44,11 +43,11 @@
 				$string = '<tr>';
 				
 				//$string .= '<td id="td_border">' . $row['id'] . '</td>';
-				$string .= '<td id="td_border">' . $row['date_completed'] . '</td>';
-				$string .= '<td id="td_border">' . $row['armor_quant'] . '</td>';
-				$string .= '<td id="td_border">' . $row['shield_quant'] . '</td>';
-				$string .= '<td id="td_border">' . $row['tax'] . '</td>';
-				$string .= '<td id="td_border">' . fmt($profit) . '</td>';
+				$string .= '<td id="td_border" class="right_just">' . $row['date_completed'] . '</td>';
+				$string .= '<td id="td_border" class="right_just">' . $row['armor_quant'] . '</td>';
+				$string .= '<td id="td_border" class="right_just">' . $row['shield_quant'] . '</td>';
+				$string .= '<td id="td_border" class="right_just">' . $row['tax'] . '</td>';
+				$string .= '<td id="td_border" class="right_just">' . fmt($profit) . '</td>';
 				
 				$string .= '</tr>';
 				
@@ -66,21 +65,21 @@
 	
 	?>
 	
-	<table>
+	<table id="table_border">
 		<tr>
-			<td>Total cycles:</td><td><?php echo isset($total_cycles)?$total_cycles:'Var unset';?></td>
+			<td id="td_border">Total cycles:</td><td id="td_border"><?php echo isset($total_cycles)?$total_cycles:'Var unset';?></td>
 		</tr>
 		<tr>
-			<td>Total runs:</td><td><?php echo isset($total_runs)?$total_runs:'Var unset';?></td>
+			<td id="td_border">Total runs:</td><td id="td_border"><?php echo isset($total_runs)?$total_runs:'Var unset';?></td>
 		</tr>
 		<tr>
-			<td>Highest profit:</td><td id="right_just"><?php echo isset($max_profit)?fmt($max_profit):'Var unset';?></td>
+			<td id="td_border">Highest profit:</td><td id="td_border" class="right_just"><?php echo isset($max_profit)?fmt($max_profit):'Var unset';?></td>
 		</tr>
 		<tr>
-			<td>Average profit:</td><td id="right_just"><?php echo isset($avg_profit)?fmt($avg_profit):'Var unset';?></td>
+			<td id="td_border">Average profit:</td><td  id="td_border" class="right_just"><?php echo isset($avg_profit)?fmt($avg_profit):'Var unset';?></td>
 		</tr>
 		<tr>
-			<td>Total profit:</td><td id="right_just"><?php echo isset($total_profit)?fmt($total_profit):'Var unset';?></td>
+			<td id="td_border">Total profit:</td><td id="td_border" class="right_just"><?php echo isset($total_profit)?fmt($total_profit):'Var unset';?></td>
 		</tr>
 	</table>
 	
@@ -124,6 +123,8 @@
 	<form action="stats.php" method="post">
 	<input type="submit" name="submit" value="Show all records">
 	</form>
+	
+	<a href="index.php">Back to Logging Tool</a><br>
 	
 </body>
 </html>

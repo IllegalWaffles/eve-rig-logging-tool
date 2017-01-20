@@ -8,8 +8,17 @@ body {
 	
 	border-style: solid;
 	border-width: 1px;
-	width: 625px;
+	width: 670px;
 	padding: 10px;
+	
+}
+
+#edit_form {
+	
+	border-style: solid;
+	border-width: 1px;
+	padding: 10px;
+	width: 670px;
 	
 }
 
@@ -36,7 +45,7 @@ body {
 
 input[type="number"] {
 	
-	width:80px;
+	width:95px;
 	
 }
 
@@ -54,7 +63,7 @@ input[type="number"] {
 	
 }
 
-#right_just {
+.right_just {
 	
 	text-align: right;
 	
