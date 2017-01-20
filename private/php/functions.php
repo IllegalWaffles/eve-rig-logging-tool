@@ -137,11 +137,39 @@
 	function update_record($record){
 		global $db;
 		
-		$sql =  'UPDATE rig_log ';
-		$sql .= '';
+		$sql =  'UPDATE rig_log SET ';
+		$sql .= 'intact_armor_plates = ?, nanite_compound = ?, interface_circuit = ?, ';
+		$sql .= 'power_circuit = ?, logic_circuit = ?, enhanced_ward_console = ?, ';
+		$sql .= 'shield_quant = ?, shield_price = ?, armor_quant = ?, armor_price = ?, ';
+		$sql .= 'tax = ? ';
+		$sql .= 'WHERE id = ?;';
 		
 		$sql = $db->prepare($sql);
 		
+		
+		$sql->bind_param('ddddddididdi',
+						 $record['intact_armor_plates'],
+						 $record['nanite_compound'],
+						 $record['interface_circuit'],
+						 $record['power_circuit'],
+						 $record['logic_circuit'],
+						 $record['enhanced_ward_console'],
+						 $record['shield_quant'],
+						 $record['shield_price'],
+						 $record['armor_quant'],
+						 $record['armor_price'],
+						 $record['tax'],
+						 $record['id']); 
+						 
+		$result = $sql->execute();
+		
+		if(!$result){
+			
+			echo db_error($db);
+			db_close($db);
+			exit;
+			
+		}
 		
 		
 	}

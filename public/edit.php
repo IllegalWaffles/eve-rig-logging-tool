@@ -35,10 +35,10 @@
 			'shield_quant' => $_POST['shield_quant'],
 			'shield_price' => $_POST['shield_price'],
 			'armor_quant' => $_POST['armor_quant'],
-			'armor_price' => $_POST['armor_price'];
+			'armor_price' => $_POST['armor_price']
 		);
 		
-		
+		update_record($record);
 		
 	}
 	
