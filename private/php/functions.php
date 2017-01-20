@@ -134,4 +134,16 @@
 		
 	}
 	
+	function update_record($record){
+		global $db;
+		
+		$sql =  'UPDATE rig_log ';
+		$sql .= '';
+		
+		$sql = $db->prepare($sql);
+		
+		
+		
+	}
+	
 ?>
