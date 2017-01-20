@@ -39,17 +39,27 @@
 		$costPerArmor += ($stats['nanite_compound'] * $ARMOR_QUANTS['nanite_compound']);
 		$costPerArmor += ($stats['interface_circuit'] * $ARMOR_QUANTS['interface_circuit']);
 		
+		//echo 'DEBUG: Cost per armor: ' . fmt($costPerArmor);
+		
 		$costPerShield =  ($stats['enhanced_ward_console'] * $SHIELD_QUANTS['enhanced_ward_console']);
 		$costPerShield += ($stats['logic_circuit'] * $SHIELD_QUANTS['logic_circuit']);
 		$costPerShield += ($stats['power_circuit'] * $SHIELD_QUANTS['power_circuit']);
 		
+		//echo '<br>DEBUG: Cost per shield: ' . fmt($costPerShield);
+		
 		$totalCost = ($costPerArmor * $stats['armor_quant']) + ($costPerShield * $stats['shield_quant']);
 		
-		// Include tax in calculation
-		$totalCost = $totalCost * (1 + ($stats['tax'] * 1.1));
+		//echo '<br>DEBUG: Total cost: ' . fmt($totalCost);
+		
+		$totalCost *= 1 + $stats['tax'] * 1.1;
+		
+		//echo '<br>DEBUG: Total cost (with tax): ' . fmt($totalCost);
 		
 		$revenuePerArmor = $stats['armor_price'];
 		$revenuePerShield = $stats['shield_price'];
+		
+		//echo '<br>DEBUG: Revenue per armor: ' . fmt($revenuePerArmor);
+		//echo '<br>DEBUG: Revenue per shield: ' . fmt($revenuePerShield);
 		
 		$totalRevenue = ($revenuePerArmor * $stats['armor_quant']) + ($revenuePerShield * $stats['shield_quant']);
 		

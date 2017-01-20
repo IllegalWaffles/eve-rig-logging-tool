@@ -23,11 +23,9 @@
 		
 		$error = !validate_stats($stats);
 		
-		if(!$error){
+		if(!$error)
 			//No errors. Proceed
 			insert_into_db($stats);
-			
-		}
 		
 	}
 	

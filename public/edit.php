@@ -5,9 +5,12 @@
 	$selected = isset($_POST['select']);
 	$submitted = isset($_POST['submit']);
 	
+	echo 'Record selected: ' . $selected;
+	echo '<br>Edits submitted: ' . $submitted;
+	
 	$records = get_all_logs();
 	
-	$record;
+	$record; // Make this global because we need it in several places
 	
 	if($selected) {
 		
@@ -16,10 +19,9 @@
 		
 	}
 	else if($submitted) {
-		
 		// Alter the record as needed
-		if(!isset($_GET['id']))
-			header('Location: index.php');
+		//if(!isset($_GET['id']))
+		//	header('Location: index.php');
 			
 		$id = $_GET['id'];
 		
@@ -39,18 +41,17 @@
 			echo 'No records found.';
 		else {
 			
-			echo '<select name=\'record_id\'>';
+			echo '<select name="record_id">';
 			
 			while($row=$records->fetch_assoc())
 				echo "\n\t\t\t" . '<option value=' . $row['id'] . '>'. $row['date_completed'] .'</option>';
-
 			
 			echo "\n\t\t" . '</select>';
+			echo '<input type="submit" name="select" value="Edit this record">';
 	
 		}
 	
 		?>
-		<input type="submit" name="select" value="Edit this record">
 	
 		<?php if($selected) { ?>
 		
@@ -73,7 +74,7 @@
 					</tr>
 					<tr>
 						<td>Station tax: </td><td><input type="number" step=0.01 name="tax" value=<?php echo $record['tax']; ?>></td>
-				
+					</tr>
 		
 				</table>
 			
