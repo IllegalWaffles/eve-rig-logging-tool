@@ -76,12 +76,12 @@
 				
 		$sql =  'INSERT INTO rig_log ';
 		$sql .= '(date_completed, intact_armor_plates, nanite_compound, interface_circuit, power_circuit, logic_circuit, enhanced_ward_console, ';
-		$sql .= 'shield_quant, shield_price, armor_quant, armor_price, tax)';
+		$sql .= 'shield_quant, shield_price, armor_quant, armor_price, tax, completed)';
 		$sql .= ' VALUES ';
-		$sql .= '(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);';
+		$sql .= '(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);';
 		$sql = $db->prepare($sql);
 		
-		$sql->bind_param('sddddddididd', 
+		$sql->bind_param('sddddddididdi', 
 			$date, 
 			$stats['intact_armor_plates'],
 			$stats['nanite_compound'],
@@ -93,7 +93,8 @@
 			$stats['shield_price'],
 			$stats['armor_quant'],
 			$stats['armor_price'],
-			$stats['tax']
+			$stats['tax'],
+			$stats['completed']
 			);
 		
 		$result = $sql->execute();
@@ -141,14 +142,14 @@
 		$sql .= 'intact_armor_plates = ?, nanite_compound = ?, interface_circuit = ?, ';
 		$sql .= 'power_circuit = ?, logic_circuit = ?, enhanced_ward_console = ?, ';
 		$sql .= 'shield_quant = ?, shield_price = ?, armor_quant = ?, armor_price = ?, ';
-		$sql .= 'tax = ? ';
+		$sql .= 'tax = ?, completed= ? ';
 		$sql .= 'WHERE id = ? ';
 		$sql .= 'LIMIT 1;';
 		
 		$sql = $db->prepare($sql);
 		
 		
-		$sql->bind_param('ddddddididdi',
+		$sql->bind_param('ddddddididdii',
 						 $record['intact_armor_plates'],
 						 $record['nanite_compound'],
 						 $record['interface_circuit'],
@@ -160,6 +161,7 @@
 						 $record['armor_quant'],
 						 $record['armor_price'],
 						 $record['tax'],
+						 $record['completed'],
 						 $record['id']); 
 						 
 		$result = $sql->execute();

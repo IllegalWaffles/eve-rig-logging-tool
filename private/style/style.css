@@ -73,6 +73,7 @@ input[type="number"] {
 	
 	border: 1px solid black;
 	border-collapse: collapse;
+	background-color: white;
 	
 }
 
@@ -80,5 +81,6 @@ input[type="number"] {
 	
 	border: 1px solid black;
 	padding: 5px;
+	background-color: white;
 	
 }

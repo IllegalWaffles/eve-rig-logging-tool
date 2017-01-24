@@ -13,12 +13,15 @@
 	$avg_profit =	0;
 	$total_profit =	0;
 	
-	$num_records = 0;
+	$num_records =  0;
 	
 ?>
 
-<html>
-<head><link rel="stylesheet" type="text/css" href = "../private/style/style.css"></head>
+<html lang="en">
+<head>
+	<link rel="stylesheet" type="text/css" href = "../private/style/style.css">
+	<meta charset="UTF-8">
+</head>
 <body>
 
 	<div id="header">Statistics</div>
@@ -32,12 +35,24 @@
 	
 			while($row = $log->fetch_assoc()) {
 				
-				$profit = calculate_profit_for_record($row);
+				if($row['completed']){
 				
-				$total_profit += $profit;
-				++$total_cycles;
-				$max_profit = $profit > $max_profit?$profit:$max_profit;
-				$total_runs += $row['armor_quant'] + $row['shield_quant'];
+					$profit = calculate_profit_for_record($row);
+					
+					$total_profit += $profit;
+					
+					++$total_cycles;
+					
+					$max_profit = $profit > $max_profit?$profit:$max_profit;
+					$total_runs += $row['armor_quant'] + $row['shield_quant'];
+				
+				}
+				else
+				{
+
+					$profit = 0;
+				
+				}
 				
 				// Store output for later
 				$string = '<tr>';
@@ -47,6 +62,7 @@
 				$string .= '<td id="td_border" class="right_just">' . $row['armor_quant'] . '</td>';
 				$string .= '<td id="td_border" class="right_just">' . $row['shield_quant'] . '</td>';
 				$string .= '<td id="td_border" class="right_just">' . $row['tax'] . '</td>';
+				$string .= '<td id="td_border" class="right_just">' . ($row['completed']?'Yes':'No') . '</td>';
 				$string .= '<td id="td_border" class="right_just">' . fmt($profit) . '</td>';
 				
 				$string .= '</tr>';
@@ -89,7 +105,7 @@
 	
 		if($submitted && $num_records > 0) {
 				
-			echo 'All records: <br>';
+			echo '<div id = "secondary_header">All records:</div>';
 				
 			//Print the entire records table
 			echo '<table id="table_border">';
@@ -100,6 +116,7 @@
 					echo '<th id="td_border">Armor Quant</th>';
 					echo '<th id="td_border">Shield Quant</th>';
 					echo '<th id="td_border">Tax %</th>';
+					echo '<th id="td_border">Completed</th>';
 					echo '<th id="td_border">Profits</th>';
 					
 				echo '</tr>';
@@ -120,9 +137,13 @@
 		
 	?>
 	
-	<form action="stats.php" method="post">
-	<input type="submit" name="submit" value="Show all records">
-	</form>
+	<?php if(!(isset($submitted) && $submitted)){ ?>
+	
+		<form action="stats.php" method="post">
+			<input type="submit" name="submit" value="Show all records"> 
+		</form>
+	
+	<?php } ?>
 	
 	<a href="index.php">Back to Logging Tool</a><br>
 	

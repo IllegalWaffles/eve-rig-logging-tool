@@ -35,7 +35,9 @@
 			'shield_quant' => $_POST['shield_quant'],
 			'shield_price' => $_POST['shield_price'],
 			'armor_quant' => $_POST['armor_quant'],
-			'armor_price' => $_POST['armor_price']
+			'armor_price' => $_POST['armor_price'],
+			'completed' => $_POST['completed']
+			
 		);
 		
 		update_record($record);
@@ -101,7 +103,16 @@
 			<tr>
 				<td>Station tax: </td><td><input type="number" step=0.0001 name="tax" value=<?php echo $record['tax']; ?>></td>
 			</tr>
-
+			<tr>
+				<td>Completed?</td>
+				<td>
+				<select name='completed'>
+					<option value=1 <?php echo $record['completed']?'selected="selected"':''; ?>>Yes</option>
+					<option value=0 <?php echo (!$record['completed'])?'selected="selected"':''; ?>>No</option>
+				</select>
+				</td>
+			</tr>
+			
 		</table>
 	
 		<table>
