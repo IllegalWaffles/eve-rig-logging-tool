@@ -63,6 +63,12 @@
 		
 		$totalRevenue = ($revenuePerArmor * $stats['armor_quant']) + ($revenuePerShield * $stats['shield_quant']);
 		
+		//echo SALES_TAX . ':' . (1 - SALES_TAX) . ':' . $totalRevenue . '<br>';
+		
+		$totalRevenue *= (1 - SALES_TAX);
+		
+		//echo $totalRevenue . ':' . $totalCost . '<br><br>';
+		
 		$profit = $totalRevenue - $totalCost;
 
 		return $profit;
