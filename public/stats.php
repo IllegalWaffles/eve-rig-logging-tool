@@ -19,7 +19,7 @@
 
 <html lang="en">
 <head>
-	<link rel="stylesheet" type="text/css" href = "../private/style/style.css">
+	<link rel="stylesheet" type="text/css" href = '<?php echo STYLESHEET; ?>'>
 	<meta charset="UTF-8">
 </head>
 <body>
@@ -105,7 +105,7 @@
 	
 		if($submitted && $num_records > 0) {
 				
-			echo '<div id = "secondary_header">All records:</div>';
+			echo '<div id = "secondary_header" class="eve-font">All records:</div>';
 				
 			//Print the entire records table
 			echo '<table id="table_border">';

@@ -1,0 +1,131 @@
+
+@import url('https://fonts.googleapis.com/css?family=Kelly+Slab');
+@font-face{
+
+	font-family: eveFont;
+	src: url(../fonts/eve.ttf);
+
+}
+
+body {
+	
+	background-color:#232a35;	
+	color:#d6d6d6;
+	font-family: 'Kelly Slab', cursive;
+	
+}
+
+#main_form {
+	
+	border-style: solid;
+	border-width: 1px;
+	width: 670px;
+	padding: 10px;
+	
+}
+
+#edit_form {
+	
+	border-style: solid;
+	border-width: 1px;
+	padding: 10px;
+	width: 670px;
+	
+}
+
+#header {
+	
+	font-family: eveFont;
+	font-weight:bold;
+	font-size: 250%;
+	
+}
+
+.eve-font {
+
+	font-family: eveFont !important;
+
+}
+
+.kelly-font {
+
+	font-family: 'Kelly Slab', cursive !important;
+
+}
+
+#secondary_header {
+	
+	font-weight:bold;
+	font-size: 120%;
+	
+}
+
+#tertiary_header {
+	
+	font-weight:bold;
+	font-size: 110%;
+	
+}
+
+input[type="number"] {
+	
+	font-family: 'Kelly Slab', cursive;
+	width:95px;
+	
+}
+
+input[type="submit"] {
+
+	font-family: 'Kelly Slab', cursive;
+	/*font-size:100%;*/
+
+}
+
+#note {
+	
+	font-weight: bold;
+	font-style: italic;
+	font-size: 90%;
+	
+}
+
+#centered {
+	
+	text-align: center;
+	
+}
+
+.right_just {
+	
+	text-align: right;
+	
+}
+
+#table_border {
+	
+	border: 1px solid black;
+	border-collapse: collapse;
+	background-color: #435268;
+	
+}
+
+#td_border {
+	
+	border: 1px solid #11161c;
+	padding: 5px;
+	background-color: #435268;
+	
+}
+
+select {
+
+	font-family: 'Kelly Slab', cursive;
+
+}
+
+a, a:link, a:visited {
+
+	color:#d6d6d6;
+
+}
+

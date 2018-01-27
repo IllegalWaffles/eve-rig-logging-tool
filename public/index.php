@@ -32,7 +32,7 @@
 ?>
 
 <html>
-<head><link rel="stylesheet" type="text/css" href = "../private/style/style.css"></head>
+<head><link rel="stylesheet" type="text/css" href = "<?php echo STYLESHEET; ?>"></head>
 <body>
 
 	<form action="index.php" method="post" id="main_form">
@@ -80,7 +80,7 @@
 	
 		</table>
 		<br>
-		<div id="note">Date and time will be recorded on pressing the submit button.</div>
+		<div id="note">Date and time will be recorded upon pressing the submit button.</div>
 	
 		<br>
 		<input type="submit" name="submit" value="Submit">

@@ -49,10 +49,11 @@
 ?>
 
 <html>
-<head><link rel="stylesheet" type="text/css" href = "../private/style/style.css"></head>
+<head><link rel="stylesheet" type="text/css" href = '<?php echo STYLESHEET; ?>'></head>
 <body>
 
 	<div id="header">Editing module</div>
+	<br>
 
 	<form action="edit.php" method="post">
 			
@@ -80,7 +81,7 @@
 	
 	<form id="edit_form" action="edit.php?id=<?php echo $record['id']; ?>" method="post">
 	
-		<div id = "header" >Now editing record on:</div>
+		<div id = "secondary_header" class="eve-font" >Now editing record on:</div>
 		<div id="note"><?php echo $record['date_completed']; ?></div>
 	
 		<br>
