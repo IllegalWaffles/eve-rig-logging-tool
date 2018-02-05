@@ -7,12 +7,30 @@
 
 }
 
+form {
+
+	background-color:#435268;
+
+}
+
 body {
 	
 	background-color:#232a35;	
 	color:#d6d6d6;
 	font-family: 'Kelly Slab', cursive;
 	
+}
+
+.darkBackground {
+
+	background-color:#232a35 !important;
+
+}
+
+.lightBackground {
+
+	background-color:#435268 !important;
+
 }
 
 #main_form {

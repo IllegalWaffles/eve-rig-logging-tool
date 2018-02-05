@@ -31,6 +31,18 @@
 		
 	}
 	
+	function calculate_raw_cost_per_shield($stats){
+		global $ARMOR_QUANTS;
+		global $SHIELD_QUANTS;
+		
+		$costPerShield =  ($stats['enhanced_ward_console'] * $SHIELD_QUANTS['enhanced_ward_console']);
+		$costPerShield += ($stats['logic_circuit'] * $SHIELD_QUANTS['logic_circuit']);
+		$costPerShield += ($stats['power_circuit'] * $SHIELD_QUANTS['power_circuit']);
+		
+		return $costPerShield;
+		
+	}
+	
 	function calculate_profit_for_record($stats){
 		global $ARMOR_QUANTS;
 		global $SHIELD_QUANTS;
@@ -139,6 +151,18 @@
 		
 		return $result;
 		
+	}
+
+	function delete_log_by_ID($id){
+		global $db;
+	
+		$sql = 'DELETE FROM rig_log WHERE id=' . $id . ';';
+		$result = $db->query($sql);
+
+		if(!$result)
+			exit('Deleting record by ID failed.');
+
+
 	}
 	
 	function update_record($record){

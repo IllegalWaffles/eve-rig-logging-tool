@@ -1,21 +1,32 @@
-<?php
+<?php require_once("../private/php/init.php"); ?>
 
-	require_once("../private/php/init.php");
+<html>
+<head><link rel="stylesheet" type="text/css" href = '<?php echo STYLESHEET; ?>'></head>
+<body>
+
+	<div id="header">Editing module</div>
+	<br>
+
+<?php
 
 	$selected = isset($_POST['select']);
 	$submitted = isset($_POST['submit']);
+
+	$deleted = isset($_POST['delete']);
 	
+	$id_to_get = -1;
+	$id_delete = -1;
+
 	$records = get_all_logs();
 	
 	$record; // Make this global because we need it in several places
-	
+
 	if($selected) {
 		
 		$id_to_get = isset($_POST['record_id'])?$_POST['record_id']:0;
 		$record = get_log_by_ID($id_to_get)->fetch_assoc();
 		
-	}
-	else if($submitted) {
+	} else if($submitted) {
 		// Alter the record as needed
 		if(!isset($_GET['id']))
 			header('Location: index.php');
@@ -39,23 +50,32 @@
 			'completed' => $_POST['completed']
 			
 		);
+
+		$record['tax'] /= 100.0;
 		
 		update_record($record);
 		
 		echo '<div id="secondary_header"> Edit submitted. </div>';
 		
+	} else if ($deleted){
+
+		if(!isset($_GET['id']))
+			header('Location: index.php');
+
+		$id = $_GET['id'];
+
+		$id_delete = $id;
+
+		delete_log_by_id($id);
+
+		echo '<div id="secondary_header"> Record deleted. </div>';
+
 	}
 	
 ?>
 
-<html>
-<head><link rel="stylesheet" type="text/css" href = '<?php echo STYLESHEET; ?>'></head>
-<body>
 
-	<div id="header">Editing module</div>
-	<br>
-
-	<form action="edit.php" method="post">
+	<form class="darkBackground" action="edit.php" method="post">
 			
 		<?php
 		
@@ -65,8 +85,22 @@
 			
 			echo '<select name="record_id">';
 			
-			while($row=$records->fetch_assoc())
-				echo "\n\t\t\t" . '<option value=' . $row['id'] . '>'. $row['date_completed'] .'</option>';
+			while($row=$records->fetch_assoc()){
+
+				if($deleted && $row['id'] == $id_delete)
+					continue;
+			
+				$outputstr  = "\n\t\t\t";
+				$outputstr .= '<option value=';
+				$outputstr .= $row['id'];
+				$outputstr .= $selected && $row['id'] == $id_to_get?' selected="selected" ':'';
+				$outputstr .= '>';
+				$outputstr .= $row['date_completed'];
+				$outputstr .= '</option>';
+
+				echo $outputstr;
+
+			}
 			
 			echo "\n\t\t" . '</select>';
 			echo '<input type="submit" name="select" value="Edit this record">';
@@ -102,7 +136,7 @@
 				<td>Mat 6 (Consol): </td> <td><input type="number" step=0.01 name="consol" value=<?php echo $record['enhanced_ward_console']; ?>></td>
 			</tr>
 			<tr>
-				<td>Station tax: </td><td><input type="number" step=0.0001 name="tax" value=<?php echo $record['tax']; ?>></td>
+				<td>Station tax: </td><td><input type="number" step=0.0001 name="tax" value=<?php echo $record['tax']*100.0; ?>></td>
 			</tr>
 			<tr>
 				<td>Completed?</td>
@@ -134,7 +168,8 @@
 		
 		<br>
 		<input type="submit" name="submit" value="Submit edits">
-		
+		<input type="submit" name="delete" value="Delete this record">	
+	
 	</form>
 	
 	<?php } ?>

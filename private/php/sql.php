@@ -1,11 +1,10 @@
 <?php
 
 	// database credentials and general sql functions will be kept here
-	// database credentials omitted for git
 	define("DB_SERVER", "localhost");
-	define("DB_USER", "");
-	define("DB_PASS", "");
-	define("DB_NAME", "");
+	define("DB_USER", "kgas");
+	define("DB_PASS", "Kgas123");
+	define("DB_NAME", "kgas_database");
 	
 	function db_connect() {
 		

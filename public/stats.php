@@ -7,6 +7,8 @@
 	
 	$submitted = isset($_POST['submit']);
 	
+	$hidden = isset($_POST['hide']);
+
 	$total_cycles = 0;
 	$total_runs = 	0;
 	$max_profit = 	0;
@@ -31,7 +33,6 @@
 		$num_records = $log->num_rows;
 	
 		if($num_records != 0) {
-	
 	
 			while($row = $log->fetch_assoc()) {
 				
@@ -61,7 +62,11 @@
 				$string .= '<td id="td_border" class="right_just">' . $row['date_completed'] . '</td>';
 				$string .= '<td id="td_border" class="right_just">' . $row['armor_quant'] . '</td>';
 				$string .= '<td id="td_border" class="right_just">' . $row['shield_quant'] . '</td>';
-				$string .= '<td id="td_border" class="right_just">' . $row['tax'] . '</td>';
+				$string .= '<td id="td_border" class="right_just">' . ($row['tax']*100.0) . '</td>';
+				
+				$string .= '<td id="td_border" class="right_just">' . fmt(calculate_raw_cost_per_shield($row)) . '</td>';
+				$string .= '<td id="td_border" class="right_just">' . fmt($row['shield_price']) . '</td>';
+				
 				$string .= '<td id="td_border" class="right_just">' . ($row['completed']?'Yes':'No') . '</td>';
 				$string .= '<td id="td_border" class="right_just">' . fmt($profit) . '</td>';
 				
@@ -103,7 +108,7 @@
 	
 	<?php
 	
-		if($submitted && $num_records > 0) {
+		if($submitted && $num_records > 0 && !$hidden) {
 				
 			echo '<div id = "secondary_header" class="eve-font">All records:</div>';
 				
@@ -115,7 +120,11 @@
 					echo '<th id="td_border">Timestamp</th>';
 					echo '<th id="td_border">Armor Quant</th>';
 					echo '<th id="td_border">Shield Quant</th>';
-					echo '<th id="td_border">Tax %</th>';
+					echo '<th id="td_border">Production Tax %</th>';
+					
+					echo '<th id="td_border">Raw Buying Cost per Shield</th>';
+					echo '<th id="td_border">Raw Selling Cost per Shield</th>';
+					
 					echo '<th id="td_border">Completed</th>';
 					echo '<th id="td_border">Profits</th>';
 					
@@ -127,6 +136,16 @@
 			
 			echo '</table>';
 			echo '<br>';
+	
+			?>
+
+			<form class="darkBackground" action="stats.php" method="post">
+				<input type="submit" name="hide" value="Hide all records">
+			</form>
+
+			<?php
+
+
 			
 		}
 		else if($submitted && $num_records <= 0) {
@@ -139,7 +158,7 @@
 	
 	<?php if(!(isset($submitted) && $submitted)){ ?>
 	
-		<form action="stats.php" method="post">
+		<form class="darkBackground" action="stats.php" method="post">
 			<input type="submit" name="submit" value="Show all records"> 
 		</form>
 	
